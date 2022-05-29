@@ -30,6 +30,8 @@ export const NewTransactionModal: React.FC<NewTransactionModalProps> = (
       type: typeTransaction,
       category,
     });
+
+    props.onCloseNewModalTransaction();
   };
 
   return (
