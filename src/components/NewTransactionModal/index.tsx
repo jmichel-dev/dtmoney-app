@@ -1,12 +1,12 @@
 import { FormEvent, useState } from "react";
 import Modal from "react-modal";
-import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 
 import closeImg from "../../assets/img/close.svg";
 import incomeImg from "../../assets/img/income.svg";
 import outcomeImg from "../../assets/img/outcome.svg";
 import { api } from "../../services/api";
 
+import { Container, RadioBox, TransactionTypeContainer } from "./styles";
 interface NewTransactionModalProps {
   isNewTransactionModalOpen: boolean;
   onCloseNewModalTransaction: () => void;
@@ -27,7 +27,6 @@ export const NewTransactionModal: React.FC<NewTransactionModalProps> = (
       amount: value,
       typeTransaction,
       category,
-      createdAt: new Date(),
     };
 
     api.post("/transactions", data);
