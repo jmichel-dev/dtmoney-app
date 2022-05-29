@@ -10,11 +10,20 @@ interface Transaction {
   createdAt: Date;
 }
 
+type TransactionRequest = Omit<Transaction, "id" | "createdAt">;
+
 interface TransactionProviderProps {
   children: ReactNode;
 }
 
-export const TransactionContext = createContext<Transaction[]>([]);
+interface TransactionContextProps {
+  transactions: Transaction[];
+  createTransaction: (transaction: TransactionRequest) => Promise<void>;
+}
+
+export const TransactionContext = createContext<TransactionContextProps>(
+  {} as TransactionContextProps
+);
 
 export const TransactionProvider: React.FC<TransactionProviderProps> = (
   props
@@ -31,8 +40,12 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = (
     getTransactions();
   }, []);
 
+  const createTransaction = async (transaction: TransactionRequest) => {
+    await api.post("/transactions", transaction);
+  };
+
   return (
-    <TransactionContext.Provider value={transactions}>
+    <TransactionContext.Provider value={{ transactions, createTransaction }}>
       {props.children}
     </TransactionContext.Provider>
   );
