@@ -30,9 +30,9 @@ export const Container = styled.div`
         color: var(--green);
       }
 
-      &.expense {
+      &.outcome {
         color: var(--red);
       }
     }
   }
-`
+`;
