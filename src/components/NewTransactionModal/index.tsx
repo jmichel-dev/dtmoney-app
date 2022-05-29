@@ -32,6 +32,10 @@ export const NewTransactionModal: React.FC<NewTransactionModalProps> = (
     });
 
     props.onCloseNewModalTransaction();
+    setTypeTransaction("income");
+    setTitle("");
+    setCategory("");
+    setValue(0);
   };
 
   return (
