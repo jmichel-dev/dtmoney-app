@@ -40,8 +40,17 @@ export const TransactionProvider: React.FC<TransactionProviderProps> = (
     getTransactions();
   }, []);
 
-  const createTransaction = async (transaction: TransactionRequest) => {
-    await api.post("/transactions", transaction);
+  const createTransaction = async (transactionInput: TransactionRequest) => {
+    const response = await api.post("/transactions", {
+      ...transactionInput,
+      createdAt: new Date(),
+    });
+    const { transaction } = response.data;
+
+    setTransactions((currentTransactions) => [
+      ...currentTransactions,
+      transaction,
+    ]);
   };
 
   return (
