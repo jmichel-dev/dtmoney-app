@@ -3,8 +3,14 @@ import { Container } from "./styles";
 import incomeImg from "../../assets/img/income.svg";
 import outcomeImg from "../../assets/img/outcome.svg";
 import totalImg from "../../assets/img/total.svg";
+import { useContext } from "react";
+import { TransactionContext } from "../../contexts/TransactionsContext";
+import { formatCurrency } from "../../utils/formatter";
 
 export const Summary: React.FC = () => {
+  const { totalExpenses, totalIncome, totalOutcome } =
+    useContext(TransactionContext);
+
   return (
     <Container>
       <div>
@@ -12,21 +18,21 @@ export const Summary: React.FC = () => {
           <p>Entradas</p>
           <img src={incomeImg} alt="Entradas" />
         </header>
-        <strong>R$ 1000,00</strong>
+        <strong>{formatCurrency(totalIncome())}</strong>
       </div>
       <div>
         <header>
           <p>Entradas</p>
           <img src={outcomeImg} alt="Saidas" />
         </header>
-        <strong>R$ 500,00</strong>
+        <strong>{formatCurrency(totalOutcome())}</strong>
       </div>
       <div className="highlight-background">
         <header>
           <p>Total</p>
-          <img src={totalImg} alt="Entradas" />
+          <img src={totalImg} alt="Total" />
         </header>
-        <strong>R$ 500,00</strong>
+        <strong>{formatCurrency(totalExpenses())}</strong>
       </div>
     </Container>
   );
