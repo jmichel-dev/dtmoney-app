@@ -3,13 +3,11 @@ import { Container } from "./styles";
 import incomeImg from "../../assets/img/income.svg";
 import outcomeImg from "../../assets/img/outcome.svg";
 import totalImg from "../../assets/img/total.svg";
-import { useContext } from "react";
-import { TransactionContext } from "../../contexts/TransactionsContext";
 import { formatCurrency } from "../../utils/formatter";
+import { useTransactions } from "../../hooks/useTransactions";
 
 export const Summary: React.FC = () => {
-  const { totalExpenses, totalIncome, totalOutcome } =
-    useContext(TransactionContext);
+  const { totalExpenses, totalIncome, totalOutcome } = useTransactions();
 
   return (
     <Container>
